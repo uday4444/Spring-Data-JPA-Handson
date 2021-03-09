@@ -1,6 +1,7 @@
 package com.cognizant.ormlearn.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -56,6 +57,19 @@ public class CountryService {
 	public void deleteCountry(String code)
 	{
 		countryRepository.deleteById(code);
+	}
+	
+	@Transactional
+	public List<Country> findByNameContaining(String word)
+	{
+		List<Country> countries = countryRepository.findByNameContainingOrderByNameAsc(word);
+		return countries;
+	}
+	@Transactional
+	public List<Country> findByNameStartingWith(String letter)
+	{
+		List<Country> countries = countryRepository.findByNameStartingWith(letter);
+		return countries;
 	}
 	
 }
